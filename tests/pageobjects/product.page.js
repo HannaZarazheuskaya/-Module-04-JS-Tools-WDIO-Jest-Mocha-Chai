@@ -1,0 +1,63 @@
+import Page from "./page";
+import { HeaderComponent } from "./components/index.js";
+
+class ProductDetailPage extends Page {
+    constructor() {
+        super('/product');
+    }
+
+    get header() {
+        return HeaderComponent;
+    }
+
+    get productName() {
+        return $('[data-test="product-name"]');
+    }
+
+    get productPrice() {
+        return $('[data-test="unit-price"]');
+    }
+
+    //quantity
+    get productQuantity() {
+        return $('[data-test="quantity"]');
+    }
+
+    get increaseQuantityBtn() {
+        return $('[data-test="increase-quantity"]');
+    }
+
+    //buttons
+    get addToCartBtn() {
+        return $('[data-test="add-to-cart"]');
+    }
+
+    get addToFavoritesBtn() {
+        return $('[data-test="add-to-favorites"]');
+    }
+
+    
+    //methods
+
+    //clicking on + since input field is disabled
+    async increaseProdQuantity(count) {
+        await this.increaseQuantityBtn.waitForClickable();
+        //the count is set to 1 by default
+        const clicksRequired = count-1;        
+        for (let i = 0; i < clicksRequired; i++) { // 0 or 1?
+            await this.increaseQuantityBtn.click();
+        }
+    }
+
+    async addToCart() {
+        await this.addToCartBtn.waitForClickable();
+        await this.addToCartBtn.click();
+    }
+
+    async addToFavorites() {
+        await this.addToFavoritesBtn.waitForClickable();
+        await this.addToFavoritesBtn.click();
+    }
+}
+
+export default new ProductDetailPage();
