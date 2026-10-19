@@ -16,10 +16,10 @@ class ProductCard {
     }
 
     async getPrice(cardElement) {
-        const priceElement = (await cardElement.$('[data-test="product-price"]').getText()).trim();
+        const priceElement = await cardElement.$('[data-test="product-price"]');
         await priceElement.waitForDisplayed({
             timeout: 5000
-        })
+        });
         return parsePrice(await priceElement.getText());
     }
 

@@ -1,3 +1,6 @@
+import { assert } from "chai";
+import { HomePage, ProductDetailPage, CheckoutPage } from "../pageobjects/index.js";
+
 // #2 Feature: Product details page
 //   Scenario: Add products to cart from the product details page
 //     Given the user is on the home page
@@ -7,9 +10,6 @@
 //     When user opens cart
 //     Then the cart should contain 3 items of this product
 
-import { assert } from "chai";
-import { HomePage, ProductDetailPage, CheckoutPage } from "../pageobjects/index.js";
-
 describe('Cart actions on the product details page', () => {
 
 	beforeEach(async() => {
@@ -18,7 +18,7 @@ describe('Cart actions on the product details page', () => {
 
 	it('should add several product items to cart from product details page', async () => {
 		await HomePage.openFirstProduct();
-		await ProductDetailPage.increaseProdQuantity(2);
+		await ProductDetailPage.increaseProdQuantity(3);
 		await ProductDetailPage.addToCart();
 
 		const cartBadgeCount = await ProductDetailPage.header.getCartQuantity();

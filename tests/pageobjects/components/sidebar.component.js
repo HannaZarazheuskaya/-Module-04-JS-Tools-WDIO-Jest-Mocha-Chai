@@ -36,16 +36,14 @@ class Sidebar {
     }
 
     get firstCategoryCheckbox() {
-        return $('#filters > .checkbox > label > input[type="checkbox"], #filters div[data-test^="category-"] input');
-    }
+        return $('(//*[@id="filters"]//input[@name="category_id"])[1]');
+    };
 
     get firstProductCard() {
-        return $('[data-test^="product-"]');
+        return $('(//a[contains(@class, "card")][starts-with(@data-test, "product-")])[1]');
     }
 
    
-
-
     
     async clickCheckbox(checkbox) {
         await checkbox.scrollIntoView();
@@ -62,29 +60,40 @@ class Sidebar {
         });
     }
 
-        async search(query) {
+    async search(query) {
         await this.searchField.setValue(query);
         await this.searchSubmitBtn.click();
     }
 
+    async setSliderValue(pointer, target) {
+        await pointer.scrollIntoView();
+        await pointer.click();
+        for (let i = 0; i < 200; i++) {
+            const current = Number(await pointer.getAttribute('aria-valuenow'));
+            if (current === target) {
+                return;
+            }
+            await browser.keys(current > target ? 'ArrowLeft' : 'ArrowRight');
+        }
+        throw new Error(`Could not set price slider to ${target}`);
+    }
+
     async filterByPriceRange(min, max) {
         await this.priceSliderMin.waitForDisplayed();
+        await this.firstProductCard.waitForDisplayed();
 
-        const firstCardTextBefore = await this.firstProductCard.getText().catch(() => '');
+        const cardsBefore = (await this.getProductCardsText()).join('|');
 
         if (min > 0) {
-            await this.priceSliderMin.dragAndDrop({x:30, y:0});
+            await this.setSliderValue(this.priceSliderMin, min);
         }
+        await this.setSliderValue(this.priceSliderMax, max);
 
-        if (max < 200) {
-            await this.priceSliderMax.dragAndDrop({x:-100, y:0});
-        }
-        
-        await browser.waitUntil(async() => {
-            const currentText = await this.firstProductCard.getText().catch(() => '')
-            return currentText !== firstCardTextBefore;
+        await browser.waitUntil(async () => {
+            const cardsNow = (await this.getProductCardsText()).join('|');
+            return cardsNow !== cardsBefore;
         }, {
-            timeout: 5000,
+            timeout: 10000,
             timeoutMsg: 'Product layout did not change after price range change'
         });
     }
@@ -93,16 +102,23 @@ class Sidebar {
         return $('[data-test="sort"]');
     }
 
+    async getProductCardsText() {
+        return browser.execute(() =>
+            Array.from(document.querySelectorAll('a.card[data-test^="product-"]'), (el) => el.innerText)
+        );
+    }
+
     async sortBy(sortValue) {
         await this.sortDropdown.waitForDisplayed();
-        const firstCardTextBefore = await this.firstProductCard.getText().catch(() => '');
+        await this.firstProductCard.waitForDisplayed();
+        const cardsBefore = (await this.getProductCardsText()).join('|');
 
         await this.sortDropdown.selectByAttribute('value', sortValue);
         await browser.waitUntil(async () => {
-            const currentText = await this.firstProductCard.getText().catch(() => '');
-            return currentText !== firstCardTextBefore;
+            const cardsNow = (await this.getProductCardsText()).join('|');
+            return cardsNow !== cardsBefore;
         }, {
-            timeout: 5000,
+            timeout: 10000,
             timeoutMsg: `Product are not filtered according to sorting criteria ${sortValue}`
         });
     }

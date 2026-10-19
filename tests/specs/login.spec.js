@@ -1,5 +1,5 @@
 import { LoginPage, HomePage } from '../pageobjects/index.js';
-import credentials from '../pageobjects/testdata/users.json' with {type: 'json'};
+import credentials from '../testdata/users.json' with {type: 'json'};
 import { expect } from 'chai';
 
 // #1 Feature: Log in

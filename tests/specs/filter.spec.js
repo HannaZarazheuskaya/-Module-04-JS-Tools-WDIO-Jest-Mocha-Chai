@@ -1,5 +1,5 @@
-import HomePage from '../pageobjects/index.js';
-import expect from "chai";
+import { HomePage } from '../pageobjects/index.js';
+import { expect } from 'chai';
 
 // #6 Feature: Filtering
 //   Scenario: Filter products by category and price range
@@ -18,13 +18,9 @@ describe('Filter products by category and price range', () => {
     it('should filter products by specific category and price range', async() => {
         await HomePage.sidebar.filterByPriceRange(0, 10);
 
-        const categoriesLevel1 = await HomePage.sidebar.firstCategoryCheckbox;
+        const checkbox = await HomePage.sidebar.firstCategoryCheckbox;
         expect(await checkbox.isExisting()).to.be.true;
 
-        // correct??
-        const labelEl = await checkbox.parentElement();
-        const labelText = await labelEl.getText();
-        const expectedCategoryName = labelText.trim();
         await HomePage.sidebar.clickCheckbox(checkbox);
 
         const catalogCards = await HomePage.productCard.allCards;
@@ -35,9 +31,9 @@ describe('Filter products by category and price range', () => {
 
         for(const card of catalogCards) {
             const productInformation = await HomePage.productCard.getInfo(card);
-            expect(productInformation.name).to.not.be.empty;
-            expect(productInformation.price).to.be.at.least(0);
-            expect(productInformation.price).to.be.at.most(10);
+            chaiExpect(productInformation.name).to.not.be.empty;
+            chaiExpect(productInformation.price).to.be.at.least(0);
+            chaiExpect(productInformation.price).to.be.at.most(10);
         }
     });
 });

@@ -1,4 +1,4 @@
-import Page from "./page";
+import Page from "./page.js";
 import { HeaderComponent } from "./components/index.js";
 
 class ProductDetailPage extends Page {
@@ -44,7 +44,7 @@ class ProductDetailPage extends Page {
         await this.increaseQuantityBtn.waitForClickable();
         //the count is set to 1 by default
         const clicksRequired = count-1;        
-        for (let i = 0; i < clicksRequired; i++) { // 0 or 1?
+        for (let i = 0; i < clicksRequired; i++) {
             await this.increaseQuantityBtn.click();
         }
     }

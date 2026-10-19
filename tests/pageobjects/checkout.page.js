@@ -24,10 +24,9 @@ class CheckoutPage extends Page{
 
 
     get firstProdQuantityInput() {
-        return $('tbody tr [data-test="quantity"]');
+        return $('tbody tr [data-test="product-quantity"]');
     }
 
-    //buttons
     get proceedToCheckoutBtn1() {
         return $('[data-test="proceed-1"]');
     }   
@@ -55,7 +54,7 @@ class CheckoutPage extends Page{
     }
 
     get confirmBtn() {
-        return $('[data-test="finish"]'); // select payment method==confirm
+        return $('[data-test="finish"]');
     }
 
     get orderConfirmationMsg() {
@@ -93,7 +92,7 @@ class CheckoutPage extends Page{
     }
 
     async setBillingAddress(address) {
-        await this.addressForm.waitForDisplayed();
+        await this.countryDropdown.waitForDisplayed();
         await this.countryDropdown.selectByIndex(1);
         await this.postalCode.setValue(address.postCode);
         await this.houseNum.setValue(address.houseNumber);

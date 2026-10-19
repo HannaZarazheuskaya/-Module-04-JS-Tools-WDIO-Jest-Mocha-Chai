@@ -6,6 +6,10 @@ class Header {
     get homeLink() {
         return $('[data-test="nav-home"]');
     }
+
+    get categoriesMenu() {
+        return $('[data-test="nav-categories"]');
+    }
     
     get contactLink() {
         return $('[data-test="nav-contact"]');
@@ -96,7 +100,7 @@ class Header {
         if ((await this.getCurrentLanguage()) === expectedCode) {
             return;
         }
-        const menuTextBefore = await this.mainMenu.getText();
+        const menuTextBefore = await this.navBar.getText();
 
         await this.languageDropdown.waitForClickable();
         await this.languageDropdown.click();
@@ -104,7 +108,7 @@ class Header {
         await this.languageSelection(languageCode).click();
 
         await browser.waitUntil(
-            async () => (await this.getCurrentLanguage()) === expectedCode && (await this.mainMenu.getText()) !== menuTextBefore,
+            async () => (await this.getCurrentLanguage()) === expectedCode && (await this.navBar.getText()) !== menuTextBefore,
             {
                 timeoutMsg: 'Translation was unsuccessful'
             }

@@ -31,6 +31,12 @@ class LoginPage extends Page {
 
         await this.loginButton.waitForClickable();
         await this.loginButton.click();
+
+        await browser.waitUntil(async() => !(await browser.getUrl()).includes('/auth/login'),
+        {
+            timeout: 10000,
+            timeoutMsg: 'Login did not complete: still on the login page'
+        })
     }
 }
 

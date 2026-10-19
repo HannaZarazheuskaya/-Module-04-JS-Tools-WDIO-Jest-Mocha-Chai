@@ -19,9 +19,10 @@ describe('Sort products by price from High to Low', () => {
         await HomePage.sidebar.sortBy(SortOption.PRICE_HIGH_TO_LOW);
 
         const prodCards = await HomePage.productCard.allCards;
-        const prodPrices = await Promise.all(
-            prodCards.map(async(productCard) => await HomePage.productCard.getPrice(productCard))
-        );
+        const prodPrices = []; 
+        for (let i = 0; i < prodCards.length; i++) {
+            prodPrices.push(await HomePage.productCard.getPrice(prodCards[i]));
+        }
 
         prodPrices.length.should.be.above(0);
 

@@ -10,8 +10,18 @@ class FavoritesPage extends Page {
     }
 
     async getProductTitlesList() {
+        await browser.waitUntil(async() => (await this.favoriteProductTitles).length > 0,
+        {
+            timeout: 10000,
+            timeoutMsg: 'No products displayed on My Favorites page'
+        }
+    );
         const items = await this.favoriteProductTitles;
-        return Promise.all(items.map(async (item) => (await item.getText()).trim()));
+        const titles = [];
+        for (let i = 0; i < items.length; i++) {
+            titles.push((await items[i].getText()).trim());
+        }
+        return titles;
     }
 }
 

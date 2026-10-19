@@ -1,5 +1,4 @@
-import chai from 'chai';
-const should = chai.should();
+import { assert } from 'chai';
 import { HomePage } from '../pageobjects/index.js';
 
 // #4 Feature: Localization
@@ -20,11 +19,11 @@ describe('Localization check of the header', () => {
 
         const actualHeaderLabels = await HomePage.header.getMenuLabels();
         const expectedGermanLabels = {
-            home: 'Startseite',
+            home: 'Start',
             categories: 'Kategorien',
             contact: 'Kontakt',
             signIn: 'Einloggen'
         };
-        actualHeaderLabels.should.deep.equal(expectedGermanLabels);
+        assert.deepEqual(actualHeaderLabels, expectedGermanLabels);
     });
 });

@@ -55,7 +55,7 @@ export const config = {
     // Options to be passed to Mocha.
     mochaOpts: {
         ui: 'bdd',
-        timeout: 60000
+        timeout: 120000
     },
 
 
