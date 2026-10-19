@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Module 4 Task. JS Automation Frameworks: WDIO, Mocha, Chai
 
 
@@ -165,3 +166,6 @@ To run tests in only one browser use:
 `npx wdio run ./wdio.conf.js --browser chrome`
 or
 `npx wdio run ./wdio.conf.js --browser MicrosoftEdge`
+=======
+# -Module-04-JS-Tools-WDIO-Jest-Mocha-Chai
+>>>>>>> origin/main
