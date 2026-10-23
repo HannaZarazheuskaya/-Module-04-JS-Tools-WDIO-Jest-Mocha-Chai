@@ -1,5 +1,5 @@
 import { should } from "chai";
-import { HomePage, SortOption } from "../pageobjects/index.js";
+import { HomePage } from "../pageobjects/index.js";
 should();
 
 // #5 Feature: Sorting
@@ -16,14 +16,15 @@ describe('Sort products by price from High to Low', () => {
     });
 
     it('Sort products by price from High to Low as a Guest', async() => {
-        await HomePage.sidebar.sortBy(SortOption.PRICE_HIGH_TO_LOW);
+        await HomePage.sidebar.sortBy('price,desc');
 
         const prodCards = await HomePage.productCard.allCards;
         const prodPrices = []; 
+
         for (let i = 0; i < prodCards.length; i++) {
             prodPrices.push(await HomePage.productCard.getPrice(prodCards[i]));
         }
-
+        
         prodPrices.length.should.be.above(0);
 
         const expectedPricesSorted = [...prodPrices].sort((a, b) => b - a);

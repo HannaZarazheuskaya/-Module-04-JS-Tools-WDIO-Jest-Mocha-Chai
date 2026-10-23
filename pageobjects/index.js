@@ -4,5 +4,3 @@ export { default as AccountPage } from './account.page.js';
 export { default as ProductDetailPage } from './product.page.js';
 export { default as CheckoutPage } from './checkout.page.js';
 export { default as FavoritesPage } from './favorites.page.js';
-
-export { SortOption } from './components/index.js';

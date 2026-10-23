@@ -18,7 +18,6 @@ class ProductDetailPage extends Page {
         return $('[data-test="unit-price"]');
     }
 
-    //quantity
     get productQuantity() {
         return $('[data-test="quantity"]');
     }
@@ -27,7 +26,6 @@ class ProductDetailPage extends Page {
         return $('[data-test="increase-quantity"]');
     }
 
-    //buttons
     get addToCartBtn() {
         return $('[data-test="add-to-cart"]');
     }
@@ -36,13 +34,8 @@ class ProductDetailPage extends Page {
         return $('[data-test="add-to-favorites"]');
     }
 
-    
-    //methods
-
-    //clicking on + since input field is disabled
     async increaseProdQuantity(count) {
         await this.increaseQuantityBtn.waitForClickable();
-        //the count is set to 1 by default
         const clicksRequired = count-1;        
         for (let i = 0; i < clicksRequired; i++) {
             await this.increaseQuantityBtn.click();

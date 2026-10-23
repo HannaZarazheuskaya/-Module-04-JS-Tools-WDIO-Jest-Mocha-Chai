@@ -1,5 +1,5 @@
 import { LoginPage, HomePage } from '../pageobjects/index.js';
-import credentials from '../testdata/users.json' with {type: 'json'};
+import users from '../testdata/users.json' with {type: 'json'};
 import { expect } from 'chai';
 
 // #1 Feature: Log in
@@ -12,11 +12,11 @@ import { expect } from 'chai';
 describe('Log in with valid credentials', () => {
     
     it('should log in successfully as a User with valid credentials', async() => {
-        const targetUser = credentials.user[0];
+        const user = users.customer1;
 
         await LoginPage.open();
 
-        await LoginPage.login(targetUser.email, targetUser.password);
+        await LoginPage.login(user.email, user.password);
 
         await browser.waitUntil(async() => {
             const currentUrl = await browser.getUrl();
@@ -28,6 +28,6 @@ describe('Log in with valid credentials', () => {
 
         const actualName = await HomePage.header.getUserName();
 
-        expect(actualName).to.equal(targetUser.name);
+        expect(actualName).to.equal(user.name);
     });
 });

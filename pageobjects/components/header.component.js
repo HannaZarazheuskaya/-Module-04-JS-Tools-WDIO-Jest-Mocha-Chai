@@ -42,9 +42,8 @@ class Header {
     languageSelection(languageCode) {
         return $(`[data-test="lang-${languageCode}"]`);
     }
-    
 
-    //Methods
+    
     async signIn() {
         await this.signInLink.waitForClickable();
         await this.signInLink.click();

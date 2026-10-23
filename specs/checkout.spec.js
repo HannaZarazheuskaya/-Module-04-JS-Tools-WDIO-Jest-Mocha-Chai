@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import { LoginPage, HomePage, CheckoutPage, ProductDetailPage } from '../pageobjects/index.js';
-import credentials from '../testdata/users.json' with { type: 'json' };
+import users from '../testdata/users.json' with { type: 'json' };
 
 describe('Cart actions and checkout', () => {
 
@@ -67,10 +67,10 @@ describe('Cart actions and checkout', () => {
     describe('Checkout with a specific payment option', () => {
 
         beforeEach(async () => {
-            const targetUser = credentials.user[1];
+            const user = users.customer1;
 
             await LoginPage.open();
-            await LoginPage.login(targetUser.email, targetUser.password);
+            await LoginPage.login(user.email, user.password);
 
             await HomePage.open();
             await HomePage.openFirstProduct();
@@ -81,7 +81,7 @@ describe('Cart actions and checkout', () => {
             
             await CheckoutPage.clickProceed();
             await CheckoutPage.confirmLogInStep();
-            await CheckoutPage.setBillingAddress(targetUser.address);
+            await CheckoutPage.setBillingAddress(user.address);
             await CheckoutPage.confirmAddressStep();
         });
 

@@ -7,7 +7,7 @@ export const config = {
     // Specify Test Files
     // ==================
     specs: [
-        './tests/specs/**/*.spec.js'
+        './specs/**/*.spec.js'
     ],
     
     // Capabilities

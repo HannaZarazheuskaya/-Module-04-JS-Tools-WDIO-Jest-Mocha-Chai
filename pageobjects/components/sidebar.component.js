@@ -1,11 +1,3 @@
-export const SortOption = Object.freeze({
-    NAME_A_Z: 'name,asc',
-    NAME_Z_A: 'name,desc',
-    PRICE_HIGH_TO_LOW: 'price,desc',
-    PRICE_LOW_TO_HIGH: 'price,asc',
-});
-
-
 class Sidebar {
     get sectionTitles() {
         return $$('#filters h4.grid-title');

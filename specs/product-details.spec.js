@@ -20,7 +20,7 @@ describe('Cart actions on the product details page', () => {
 		await HomePage.openFirstProduct();
 		await ProductDetailPage.increaseProdQuantity(3);
 		await ProductDetailPage.addToCart();
-
+		
 		const cartBadgeCount = await ProductDetailPage.header.getCartQuantity();
 		assert.equal(
 			cartBadgeCount,

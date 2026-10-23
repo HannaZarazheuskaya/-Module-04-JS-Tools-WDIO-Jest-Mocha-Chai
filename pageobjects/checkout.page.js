@@ -31,7 +31,7 @@ class CheckoutPage extends Page{
         return $('[data-test="proceed-1"]');
     }   
 
-    // billing
+
     get addressForm() {
         return $('.login-form-1 form');
     }
@@ -62,7 +62,6 @@ class CheckoutPage extends Page{
     }
 
 
-    //methods
     async removeFirstProdFromCart() {
         await this.firstRemoveBtn.waitForClickable();
         await this.firstRemoveBtn.click();

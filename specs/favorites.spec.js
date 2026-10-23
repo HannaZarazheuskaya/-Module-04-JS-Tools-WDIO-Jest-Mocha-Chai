@@ -1,5 +1,5 @@
 import { HomePage, LoginPage, ProductDetailPage, FavoritesPage } from "../pageobjects/index.js";
-import credentials from "../testdata/users.json" with {type: 'json'};
+import users from "../testdata/users.json" with {type: 'json'};
 import { should } from "chai";
 should();
 
@@ -16,10 +16,10 @@ should();
 describe('Add a product to Favorites as a user', () => {
     
     beforeEach(async() => {
-        const targetUser = credentials.user[1];
+        const user = users.customer2;
         
         await LoginPage.open();
-        await LoginPage.login(targetUser.email, targetUser.password);
+        await LoginPage.login(user.email, user.password);
         await LoginPage.header.userMenu.waitForDisplayed({
             timeout: 5000,
             timeoutMsg: 'User was not logged in successfully'
