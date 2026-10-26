@@ -114,11 +114,10 @@ Here’s the list of actions which result in reduction of overall mark for a com
 ## Project structure
 ```
 [Task] JS Tools WDIO, JestMocha, Chai/
-├── tests/
-│   ├── pageobjects/    page objects
-│   │   └── components/ page object components
-│   ├── specs/          tests
-│   └── testdata/       credentials, address
+├── pageobjects/    page objects
+│   └── components/ page object components
+├── specs/          tests
+├── testdata/       credentials, address
 ├── .gitignore
 ├── package-lock.json
 ├── package.json
