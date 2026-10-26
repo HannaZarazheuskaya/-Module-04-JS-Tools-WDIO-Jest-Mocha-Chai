@@ -1,0 +1,41 @@
+{
+    "admin1": {
+        "name": "John Doe",
+        "email": "admin@practicesoftwaretesting.com",
+        "password": "welcome01",
+        "address": {
+            "postCode": "50321",
+            "houseNumber": "1"
+        }
+    },
+    
+    "customer1": {
+        "name": "Jane Doe",
+        "email": "customer@practicesoftwaretesting.com",
+        "password": "welcome01",
+        "address": {
+            "postCode": "1010",
+            "houseNumber": "1"
+        }
+    },
+
+    "customer2": {
+        "name": "Jack Howe",
+        "email": "customer2@practicesoftwaretesting.com",
+        "password": "welcome01",
+        "address": {
+            "postCode": "1111",
+            "houseNumber": "2"
+        }
+    },
+
+    "customer3": {
+        "name": "Bob Smith",
+        "email": "customer3@practicesoftwaretesting.com",
+        "password": "pass123",
+        "address": {
+            "postCode": "2121",
+            "houseNumber": "3"
+        }
+    }
+}
